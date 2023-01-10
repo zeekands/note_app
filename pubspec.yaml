@@ -10,10 +10,12 @@ dependencies:
   date_time_picker: ^2.1.0
   flutter_local_notifications: ^11.0.0
   localstorage: ^4.0.0+1
+  cron: ^0.5.1
   get: 4.6.5
   intl: ^0.17.0
   sqflite: ^2.2.2
   file_picker: 5.2.4
+  uuid: 3.0.7
   flutter: 
     sdk: flutter
 

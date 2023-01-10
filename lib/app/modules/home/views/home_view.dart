@@ -53,6 +53,7 @@ class HomeView extends GetView<HomeController> {
                 itemCount: controller.listNotes.length,
                 itemBuilder: (context, index) {
                   NotesModel notes = controller.listNotes[index];
+                  controller.setAlert(notes);
                   return Dismissible(
                     key: UniqueKey(),
                     onDismissed: (direction) {

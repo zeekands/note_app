@@ -70,6 +70,38 @@ class NotifictionApi {
   static Future cancelNotificationByTag(String tag) =>
       _notificationss.cancel(0, tag: tag);
 
+  static Future scheduledNotificationOnce({
+    required int id,
+    required String title,
+    required String body,
+    required String payload,
+    required Time scheduledDate,
+  }) async {
+    _notificationss.zonedSchedule(
+      id,
+      title,
+      body,
+      _scheduledDaily(scheduledDate),
+      const NotificationDetails(
+        android: AndroidNotificationDetails(
+          'channel id',
+          'channel name',
+          channelDescription: 'channel description',
+          importance: Importance.max,
+          priority: Priority.high,
+          showWhen: true,
+          playSound: T,
+          sound: RawResourceAndroidNotificationSound('adzan'),
+        ),
+      ),
+      androidAllowWhileIdle: true,
+      uiLocalNotificationDateInterpretation:
+          UILocalNotificationDateInterpretation.absoluteTime,
+      payload: payload,
+      matchDateTimeComponents: DateTimeComponents.time,
+    );
+  }
+
   static Future scheduledNotification({
     required int id,
     required String title,
