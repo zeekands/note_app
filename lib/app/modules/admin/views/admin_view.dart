@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -19,7 +21,7 @@ class AdminView extends GetView<AdminController> {
         actions: [
           IconButton(
             onPressed: () {
-              Get.toNamed('/login');
+              controller.logout();
             },
             icon: const Icon(Icons.logout),
           ),
@@ -29,8 +31,22 @@ class AdminView extends GetView<AdminController> {
           child: ListView(
         padding: EdgeInsets.symmetric(horizontal: width * 0.05),
         children: [
-          CircleAvatar(
-            radius: 50,
+          GestureDetector(
+            onTap: () {
+              controller.pickFile();
+            },
+            child: Obx(
+              () => controller.profilePicture.value == ""
+                  ? const CircleAvatar(
+                      radius: 50,
+                      child: Icon(Icons.camera_alt_outlined),
+                    )
+                  : CircleAvatar(
+                      radius: 50,
+                      backgroundImage:
+                          FileImage(File(controller.profilePicture.value)),
+                    ),
+            ),
           ),
           const Text(
             "First name",
@@ -80,7 +96,7 @@ class AdminView extends GetView<AdminController> {
           CustomTextField(
               height: height,
               width: width,
-              controller: controller.passwordController),
+              controller: controller.dateOfBirthController),
           const SizedBox(height: 10),
           const Text(
             "Gender",
@@ -90,7 +106,7 @@ class AdminView extends GetView<AdminController> {
           CustomTextField(
               height: height,
               width: width,
-              controller: controller.passwordController),
+              controller: controller.genderController),
           const SizedBox(height: 40),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
@@ -101,7 +117,9 @@ class AdminView extends GetView<AdminController> {
                 fontWeight: FontWeight.bold,
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              controller.saveAdmin();
+            },
             child: const Text("Save Changes"),
           ),
         ],

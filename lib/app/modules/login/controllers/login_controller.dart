@@ -27,13 +27,13 @@ class LoginController extends GetxController {
     if (admin.email == email && admin.password == password) {
       final adminData = AdminModel(
         id: 1,
-        firstName: "Super",
-        lastName: "Admin",
-        email: "admin@gmail.com",
-        dateOfBirth: "2000-03-10",
-        gender: "Laki - Laki",
-        password: "Admin",
-        profilePicture: "",
+        firstName: admin.firstName,
+        lastName: admin.lastName,
+        email: admin.email,
+        dateOfBirth: admin.dateOfBirth,
+        gender: admin.gender,
+        password: admin.password,
+        profilePicture: admin.profilePicture,
         isLogin: true,
       );
       storage.setItem('admin', adminData.toJson());
@@ -51,7 +51,7 @@ class LoginController extends GetxController {
       email: "admin@gmail.com",
       dateOfBirth: "2000-03-10",
       gender: "Laki - Laki",
-      password: "Admin",
+      password: "admin",
       profilePicture: "",
       isLogin: false,
     );
